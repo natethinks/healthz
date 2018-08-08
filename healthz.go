@@ -71,7 +71,7 @@ func Serve(url string, endpoint string) {
 
 	if url == "" {
 		fmt.Printf("Url/Port not specified, defaulting to localhost:8080")
-		http.ListenAndServe("localhost:8080", nil)
+		go http.ListenAndServe("localhost:8080", nil)
 	} else {
 		go http.ListenAndServe(url, nil)
 	}
