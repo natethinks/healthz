@@ -61,7 +61,7 @@ func healthzHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Serve serves the healthz endpoint on the specified endpoint and url, defaults to localhost:8080/healthz
-func Serve(url string, endpoint string) {
+func Serve(port string, endpoint string) {
 	if endpoint == "" {
 		fmt.Printf("Endpoint not specified, defaulting to /healthz")
 		http.HandleFunc("/healthz", healthzHandler)
@@ -69,10 +69,10 @@ func Serve(url string, endpoint string) {
 		http.HandleFunc(endpoint, healthzHandler)
 	}
 
-	if url == "" {
+	if port == "" {
 		fmt.Printf("Url/Port not specified, defaulting to localhost:8080")
 		go http.ListenAndServe("localhost:8080", nil)
 	} else {
-		go http.ListenAndServe(url, nil)
+		go http.ListenAndServe("localhost:"+port, nil)
 	}
 }
